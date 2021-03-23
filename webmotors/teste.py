@@ -1,0 +1,11 @@
+import requests
+import json
+session = requests.session()
+
+for i in range(1,30):
+    burp0_url = f"https://www.webmotors.com.br:443/api/search/car?url=https://www.webmotors.com.br/carros%2Festoque%3F&actualPage={i}&displayPerPage=24&order=1&showMenu=true&showCount=true&showBreadCrumb=true&testAB=false&returnUrl=false"
+    burp0_cookies = {"AMCV_3ADD33055666F1A47F000101%40AdobeOrg": "-1124106680%7CMCIDTS%7C18708%7CMCMID%7C08361442210490129111811084005471184982%7CMCOPTOUT-1616339307s%7CNONE%7CvVersion%7C5.2.0", "mbox": "session#6d299b4dc18c49e1b572416dfc07020e#1616333967", "at_check": "true", "AMCVS_3ADD33055666F1A47F000101%40AdobeOrg": "1", "WebMotorsVisitor": "1", "WMLastFilterSearch": "%7B%22car%22%3A%22carros%2Festoque%3Fidcmpint%3Dt1%3Ac17%3Am07%3Awebmotors%3Abusca%3A%3Averofertas%22%2C%22bike%22%3A%22motos%2Festoque%22%2C%22estadocidade%22%3A%22estoque%22%2C%22lastType%22%3A%22car%22%2C%22cookie%22%3A%22v3%22%2C%22ano%22%3A%7B%7D%2C%22preco%22%3A%7B%7D%2C%22marca%22%3A%22%22%2C%22modelo%22%3A%22%22%7D", "WebMotorsSearchDataLayer": "%7B%22search%22%3A%7B%22location%22%3A%7B%7D%2C%22ordination%22%3A%7B%22name%22%3A%22Mais%20relevantes%22%2C%22id%22%3A1%7D%2C%22pageNumber%22%3A2%2C%22totalResults%22%3A262662%2C%22vehicle%22%3A%7B%22type%22%3A%7B%22id%22%3A1%2C%22name%22%3A%22carro%22%7D%7D%2C%22cardExhibition%22%3A%7B%22id%22%3A%221%22%2C%22name%22%3A%22Cards%20Grid%22%7D%2C%22eventType%22%3A%22paginacaoRealizada%22%7D%7D", "WebMotorsTrackingFrom": "paginacaoRealizada"}
+    burp0_headers = {"GET /api/search/car?url=https": f"/www.webmotors.com.br/carros%2Festoque%3F&actualPage={i}&displayPerPage=24&order=1&showMenu=true&showCount=true&showBreadCrumb=true&testAB=false&returnUrl=false HTTP/1.1", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0", "Accept": "application/json, text/plain, */*", "Accept-Language": "en-US,en;q=0.5", "Accept-Encoding": "gzip, deflate", "DNT": "1", "Connection": "close", "Sec-GPC": "1"}
+    r = session.get(burp0_url, headers=burp0_headers, cookies=burp0_cookies)
+    d = json.loads(r.text)
+    print(d["SearchResults"][0]["UniqueId"])
